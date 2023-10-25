@@ -7,17 +7,23 @@
 .light {
     --text-color: var(--dark);
     --background-color: #fff;
+    --outline-placeholder: #a1a1aae0;
+    --border: #cfcfcf;
 }
 
 .dark {
     --text-color: #fff;
     --background-color: var(--dark);
+    --outline-placeholder: #ffffffe0;
+    --border: #ffffff38;
 }
 
 /* Apply the color variables to all elements */
 * {
     color: var(--text-color);
     background-color: var(--background-color);
+    box-sizing: border-box;
+
 }
 
 body {
@@ -196,4 +202,14 @@ body {
 
 .justify-align {
     text-align: justify;
+}
+
+/* Text Transform */
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }

@@ -1,0 +1,48 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: color 0.2s;
+    outline: none;
+    width: 100%;
+    border: none;
+
+    &:focus-visible {
+        outline: 1px solid var(----outline-placeholder);
+    }
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+
+    height: 36px;
+    padding: 1rem 0.5rem;
+}
+
+.spinner {
+    background-color: var(--button-bg);
+    border: 4px solid var(--button-text);
+    border-top: 4px solid var(--button-bg);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    animation: spin 1s linear infinite;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

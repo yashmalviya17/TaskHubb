@@ -1,13 +1,17 @@
-import themeSlice from "../slice/themeSlice";
-import userSlice from "../slice/userSlice";
-import taskSlice from "../slice/taskSlice";
-import categorySlice from "../slice/categorySlice";
+import { combineReducers } from "@reduxjs/toolkit";
 
-const rootReducer = {
-    theme: themeSlice,
-    userDetails: userSlice,
-    tasks: taskSlice,
-    category: categorySlice,
-};
+import themeReduce from "../slice/themeSlice";
+import userDetailsReducer from "../slice/userSlice";
+import tasksReducer from "../slice/taskSlice";
+import categoryReducer from "../slice/categorySlice";
 
-export default rootReducer;
+
+export const rootReducer = combineReducers({
+    theme: themeReduce,
+    userDetails: userDetailsReducer,
+    tasks: tasksReducer,
+    category: categoryReducer,
+});
+
+
+ export default rootReducer;

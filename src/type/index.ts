@@ -16,7 +16,7 @@ export interface User {
     token: string;
     name: string;
     email: string;
-    isLogin: boolean;
+    isLogin?: boolean;
 }
 
 export interface UserState {

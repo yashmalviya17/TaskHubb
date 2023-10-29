@@ -5,7 +5,9 @@ import Button from "../Button/Button";
 import styles from "./style/form.module.scss";
 
 import { RegisterForm as RegisterFormType } from "../../type";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { register as registerUser } from "../../store/thunks/userThunks";
 
 const RegisterForm = () => {
     const {
@@ -14,8 +16,14 @@ const RegisterForm = () => {
         formState: { errors },
     } = useForm<RegisterFormType>();
 
-    const onSubmit = (data: RegisterFormType) => {
-        console.log(data, "Submit Data");
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const user = useAppSelector(state => state.userDetails);
+    const onSubmit = async (data: RegisterFormType) => {
+        const value = await dispatch(registerUser(data));
+        if (value.meta.requestStatus === "rejected") return;
+        navigate("/");
+        console.log("register");
     };
 
     return (
@@ -58,7 +66,7 @@ const RegisterForm = () => {
                         </p>
 
                         <div className="mb-3">
-                            <Button type="submit" label="Sign Up" />
+                            <Button type="submit" label="Sign Up" loading={user.status === "loading" ? true : false} />
                         </div>
 
                         <p className="center-align text-sm mb-3">

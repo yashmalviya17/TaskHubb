@@ -5,13 +5,23 @@ import Button from "../Button/Button";
 import styles from "./style/form.module.scss";
 
 import { LoginForm as LoginFormType } from "../../type";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { login } from "../../store/thunks/userThunks";
 
 const LoginForm = () => {
     const { register, handleSubmit } = useForm<LoginFormType>();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate()
+    const user = useAppSelector(state => state.userDetails);
 
-    const onSubmit = (data: LoginFormType) => {
-        console.log(data, "Submit Data");
+    const onSubmit = async (data: LoginFormType) => {
+      const value =  await dispatch(login(data))
+        if (value.meta.requestStatus === "rejected") {
+            return
+        }
+        navigate("/")
+        console.log("login")
     };
 
     return (
@@ -41,8 +51,12 @@ const LoginForm = () => {
                             type="password"
                         />
 
+                        <p className="center-align mb-2" style={{ fontSize: "12px", color: "red" }}>
+                            {user.error && user.error}
+                        </p>
+
                         <div className="mb-3">
-                            <Button type="submit" label="Login" />
+                            <Button type="submit" label="Login" loading={user.status === "loading" ? true : false} />
                         </div>
 
                         <p className="center-align text-sm mb-3">Welcome back! Thank you for using our service</p>

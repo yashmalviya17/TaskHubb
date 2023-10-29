@@ -1,6 +1,3 @@
-const Register = () => {
-  return (
-    <div>Register</div>
-  )
-}
-export default Register
+import RegisterForm from "../components/Form/registerForm"
+
+export default RegisterForm;

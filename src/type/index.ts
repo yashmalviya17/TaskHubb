@@ -44,3 +44,12 @@ export interface ButtonProps {
     disable?: boolean;
     loading?:boolean
 }
+
+export interface LoginForm {
+    email: string;
+    password: string;
+}
+
+export interface RegisterForm extends LoginForm {
+    name? :string
+}

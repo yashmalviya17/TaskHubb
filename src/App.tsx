@@ -1,4 +1,10 @@
+import Routes from "./router";
+
 const App = () => {
-    return <h1>Hello World</h1>;
+    return (
+        <main className="light">
+         <Routes />
+        </main>
+    );
 };
 export default App;

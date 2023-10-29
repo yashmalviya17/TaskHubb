@@ -16,7 +16,7 @@ export interface User {
     token: string;
     name: string;
     email: string;
-    isLogin: boolean;
+    isLogin?: boolean;
 }
 
 export interface UserState {
@@ -43,4 +43,13 @@ export interface ButtonProps {
     label: string;
     disable?: boolean;
     loading?:boolean
+}
+
+export interface LoginForm {
+    email: string;
+    password: string;
+}
+
+export interface RegisterForm extends LoginForm {
+    name? :string
 }

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getInitialStateFromLocalStorage } from "../../utils/getUserStateFromLocal";
+import { blankUserState, getInitialStateFromLocalStorage } from "../../utils/getUserStateFromLocal";
 import { UserState } from "../../type";
+import { login, register } from "../thunks/userThunks";
 
 const initialState: UserState = getInitialStateFromLocalStorage();
 
@@ -9,11 +10,25 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         logoutUser: state => {
-            state.user.token = "";
-            state.user.name = "";
-            state.user.id = "";
-            state.user.isLogin = false;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            state = blankUserState;
         },
+    },
+    extraReducers: builder => {
+        builder.addCase(login.fulfilled || register.fulfilled, (state, { payload }) => {
+            state.user = { ...payload, isLogin: true };
+            state.error = null
+            state.status = "succeeded"
+        });
+        builder.addCase(login.pending || register.pending, state => {
+            state.status = "loading";
+        });
+        builder.addCase(login.rejected || register.rejected, (state, action) => {
+            if (action.payload) {
+                state.status = "failed";
+                state.error = action.payload as string;
+            }
+        });
     },
 });
 

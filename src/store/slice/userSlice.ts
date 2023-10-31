@@ -16,9 +16,11 @@ const userSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(login.fulfilled || register.fulfilled, (state, { payload }) => {
-            state.user = { ...payload, isLogin: true };
-            state.error = null
-            state.status = "succeeded"
+            const userState = { ...payload, isLogin: true };
+            state.user = userState;
+            state.error = null;
+            state.status = "succeeded";
+            sessionStorage.setItem("userState", JSON.stringify(userState));
         });
         builder.addCase(login.pending || register.pending, state => {
             state.status = "loading";

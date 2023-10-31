@@ -13,7 +13,7 @@ export const blankUserState: UserState = {
 };
 
 export const getInitialStateFromLocalStorage = (): UserState => {
-    const storedState = localStorage.getItem("userState");
+    const storedState = sessionStorage.getItem("userState");
     if (storedState) {
         const user = JSON.parse(storedState) as User;
         return {

@@ -1,0 +1,117 @@
+%navLinks {
+    list-style: none;
+    padding: 0;
+    display: flex;
+
+    li {
+        margin: 0 12px;
+
+        svg {
+            height: 16px;
+            width: 16px;
+            margin-top: 0;
+            margin-right: 4px;
+        }
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: var(--button-bg);
+            position: relative; /* Add relative positioning */
+
+            &:after {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: var(--button-bg);
+                transition: width 0.3s; /* Add transition for animation */
+            }
+
+            &:hover:after {
+                width: 100%; /* Expand the border on hover */
+            }
+        }
+    }
+}
+
+%glass-effect {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.8px);
+    -webkit-backdrop-filter: blur(7.8px);
+}
+
+
+.navbar {
+    background-color: var(--button-text);
+    color: var(--button-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    height: 54px;
+    position: relative;
+    z-index: 10;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1350px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+
+        .logo {
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--button-bg);
+            display: flex;
+        }
+
+        svg {
+            height: 24px;
+            width: 24px;
+            margin-top: 4px;
+        }
+
+        .navLinks {
+            @extend %navLinks;
+        }
+    }
+}
+
+.navbarMobile {
+    color: var(--button-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 54px);
+    @extend %glass-effect;
+
+    svg {
+        height: 24px;
+        width: 24px;
+        margin-top: 4px;
+    }
+
+    @extend %navLinks;
+
+    li {
+        margin: 12px 0;
+        font-size: 18px;
+        background: none;
+
+        a {
+            background: none;
+        }
+    }
+}

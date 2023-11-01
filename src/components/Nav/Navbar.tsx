@@ -1,13 +1,17 @@
+import { useEffect, useState } from "react";
 import { NavLink as Link } from "react-router-dom";
 import styles from "./style/nav.module.scss";
-import { ClipboardDocumentCheckIcon, Bars3Icon } from "@heroicons/react/24/outline";
-import { useState } from "react";
 import useIsMobile from "../../hooks/useIsMobile";
 import NavList from "./navlist";
+import { ClipboardDocumentCheckIcon, Bars3Icon } from "@heroicons/react/24/outline";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const isMobile = useIsMobile();
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [isMobile]);
 
     return (
         <>
